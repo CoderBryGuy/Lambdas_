@@ -1,0 +1,213 @@
+package com.company;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+//        new Thread(new CodeToRun()).start();
+
+
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                System.out.println("Printing from the runnable");
+//            }
+//        }).start();
+//    }
+
+        new Thread(() ->{ System.out.println("Printing from the runnable");
+            System.out.println("line 2");
+            System.out.format("this is line %d\n", 3);
+        }).start();
+
+        Employee john = new Employee("john doe", 30);
+        Employee tim = new Employee("tim buchalka", 21);
+        Employee jack = new Employee("Jack Hill", 40);
+        Employee snow = new Employee("Hank Snow",22);
+        Employee red = new Employee("Red RidingHood", 35);
+        Employee charming = new Employee("Prince Charming", 31);
+
+        List<Employee> employees = new ArrayList<>();
+        employees.add(john);
+        employees.add(tim);
+        employees.add(jack);
+        employees.add(snow);
+        employees.add(red);
+        employees.add(charming);
+
+        //        printEmployeesByAge(employees, "Employees over 30", employee -> employee.getAge() > 30);
+        //        printEmployeesByAge(employees, "Employees under 30", employee -> employee.getAge() <= 30);
+        //        printEmployeesByAge(employees, "Employees under 30", new Predicate<Employee>() {
+        //            @Override
+        //            public boolean test(Employee employee) {
+        //                return employee.getAge() < 25;
+        //            }
+        //        });
+        //
+        //        IntPredicate greatThan15 = i -> i > 15;
+        //        IntPredicate lessThan100 = i -> i < 100;
+        //        System.out.println(greatThan15.test(10));
+        //        int a = 20;
+        //        System.out.println(greatThan15.test(a + 5));
+        //
+        //        System.out.println(greatThan15.and(lessThan100).test(50));
+        //        System.out.println(greatThan15.and(lessThan100).test(15));
+        //
+        //        Random random = new Random();
+        //        Supplier<Integer> randomSupplier = () -> random.nextInt(1000);
+        //        for (int i = 0; i < 10; i++) {
+        //            System.out.println(random.nextInt(1000));
+        //        }
+        //
+        //        employees.forEach(employee -> {
+        //            String lastName = employee.getName().substring(employee.getName().indexOf(' ') +1);
+        //            System.out.println("Last Name is: " + lastName);
+        //        });
+
+
+        System.out.println("Employees over 30");
+        System.out.println("========================");
+        employees.forEach(employee -> {
+            if(employee.getAge() > 30){
+                System.out.println(employee.getName());
+            }
+        });
+
+        System.out.println("\nEmployees 30 and younger");
+        System.out.println("====================================");
+        employees.forEach(employee -> {
+            if(employee.getAge() <= 30){
+                System.out.println(employee.getName());
+            }
+        });
+
+//        employees.forEach(employee -> {
+//            System.out.println(employee.getName());
+//            System.out.println(employee.getAge());
+//        });
+
+//        for(Employee employee: employees){
+//            System.out.println(employee.getName());
+//            System.out.println(employee.getAge());
+//            new Thread(()-> System.out.println(employee.getAge())).start();
+//        }
+//
+//        System.out.println("****************************************************");
+//
+//        for (int i = 0; i < employees.size() ; i++) {
+//            Employee employee = employees.get(i);
+//            System.out.println(employee.getName());
+//            new Thread(()->System.out.println(employee.getAge())).start();
+//        }
+
+
+
+////        Collections.sort(employees, new Comparator<Employee>() {
+////            @Override
+////            public int compare(Employee employee1, Employee employee2) {
+////                return employee1.getName().compareTo(employee2.getName());
+////            }
+////        });
+//
+////        Collections.sort(employees, (Employee employee1, Employee employee2)->
+////        employee1.getName().compareTo(employee2.getName()));
+//
+//        Collections.sort(employees, (employee1, employee2)->
+//                employee1.getName().compareTo(employee2.getName()));
+//
+//        for (Employee employee : employees
+//             ) {
+//            System.out.println( employee.getName());
+//        }
+//
+//        UpperConcat uc = (s1, s2) -> {String result = s1.toUpper() + s2.toUpperCase()
+//        return result; };
+//        String sillyString = doStringStuff(uc, employees.get(0).getName(), )
+//        System.out.println(sillyString);
+
+        AnotherClass anotherClass = new AnotherClass();
+        String s = anotherClass.doSomething();
+        System.out.println(s);
+    }
+
+    private static void printEmployeesByAge(List<Employee> employees){
+        System.out.println("Employees over 30");
+        System.out.println("========================");
+        employees.forEach(employee -> {
+            if(employee.getAge() > 30){
+                System.out.println(employee.getName());
+            }
+        });
+
+        System.out.println("\nEmployees 30 and younger");
+        System.out.println("====================================");
+        employees.forEach(employee -> {
+            if(employee.getAge() <= 30){
+                System.out.println(employee.getName());
+            }
+        });
+    }
+
+    public final static String doStringStuff(UpperConcat uc, String s1, String s2){
+        return uc.upperAndConcat(s1,s2);
+    }
+}
+
+//    class CodeToRun implements Runnable {
+//        @Override
+//        public void run() {
+//            System.out.println("Printing from the runnable");
+//        }
+//    }
+
+
+class Employee {
+    private String name;
+    private int age;
+
+    public Employee(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+
+interface UpperConcat{
+    public String upperAndConcat(String s1, String s2);
+}
+
+class AnotherClass{
+    public String doSomething(){
+        int i = 0;
+
+            UpperConcat uc = (s1, s2)-> {
+                System.out.println("The lambda expression's class is " + getClass().getSimpleName());
+                String result = s1.toUpperCase() + s2.toUpperCase();
+                return result;
+            };
+
+            System.out.println("The AnotherClass class' name is " + getClass().getSimpleName());
+            return Main.doStringStuff(uc,"String1", "String2");
+    }
+}
+
